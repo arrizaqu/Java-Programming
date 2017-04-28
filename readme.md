@@ -1,9 +1,9 @@
 # JAVA SERVLET AND SPRING WITH MAVEN
 
-##DEVELOPMENT TOOLS
+## DEVELOPMENT TOOLS
 	- ECLIPSE MARS 2
 
-##DEFINITION
+## DEFINITION
 	- CREATE WEB PROJECT WITH MAVEN
 	- JSP DETECTION
 	- RUN AND COMPILE MAVEN PROJECT 
@@ -15,17 +15,17 @@
 		- CREATE SPRING CONTROLLER CLASS
 	- VIEWRESOLVER JSP FILE 
 
-##SCRIPT CODE
-##CREATE WEB PROJECT WITH MAVEN
+## SCRIPT CODE
+## CREATE WEB PROJECT WITH MAVEN
 	- File new -> Other -> Maven -> "MAVEN PROJECT" -> NEXT
 	- Choose artifact id => maven web 
 	- Create Information about project in the dialog
 	
-##JSP DETECTION
+## JSP DETECTION
 	-> Right click on Project -> Properties
 	-> Choose Project Facets -> Runtimes -> and select Apache Tomcat
 
-##RUN AND COMPILE MAVEN PROJECT
+## RUN AND COMPILE MAVEN PROJECT
 	- Add Jetty plugin on POM.XML 
 		- Code : 
 			<plugins>
@@ -47,7 +47,7 @@
 	- BUILD : mvn jetty:run
 	- BROWSER : localhost:8080/index.jsp
 
-##SPRING DEPENDENCY
+## SPRING DEPENDENCY
 	- Code : 
 	<properties>
 		<org.springframework.version>4.2.6.RELEASE</org.springframework.version>
@@ -259,12 +259,12 @@
 	    </dependency>
   </dependencies>
   
-##ADD JAVA PACKAGE WEB RESOURCES IF NOT EXIST
+## ADD JAVA PACKAGE WEB RESOURCES IF NOT EXIST
 	- Containing Java Code and Package
 	- Add java folder : src/main/java
 	- Add java Package under src/main/java like : om.soft.controller
 	
-##SPRING DISPATCHER AND CONTROLLER
+## SPRING DISPATCHER AND CONTROLLER
 	- DEPLOYMENT-DESCRIPTOR : WEB.XML
 		* CODE : 
 			<servlet>
@@ -311,7 +311,7 @@
 		* Access : 
 			- localhost:8080/hallo
 			
-##VIEWRESOLVER JSP FILE
+## VIEWRESOLVER JSP FILE
 	* CODE : 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
