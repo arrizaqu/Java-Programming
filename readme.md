@@ -14,6 +14,7 @@
 		- DISPATHCER-SERVLET.XML
 		- CREATE SPRING CONTROLLER CLASS
 	- VIEWRESOLVER JSP FILE 
+	- DETECT WEB ASSETS FOLDER
 
 ## SCRIPT CODE
 ## CREATE WEB PROJECT WITH MAVEN
@@ -322,3 +323,15 @@
 			<value>.jsp</value>
 		</property>
 	</bean>
+
+## DETECT WEB ASSETS FOLDER
+	* Reff : http://docs.spring.io/spring/docs/3.0.x/spring-framework-reference/html/mvc.html#mvc-static-resources
+	* Code : 
+		- <mvc:resources mapping="/resources/**" location="/, classpath:/META-INF/public-web-resources/"/>
+	* example : 
+		<mvc:annotation-driven />	
+		<mvc:resources mapping="/resources/**" location="/resources/"/>
+		<context:component-scan base-package="om.soft.controller"></context:component-scan>
+		
+		
+		
