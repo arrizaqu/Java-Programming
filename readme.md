@@ -3,6 +3,7 @@
 	2. Include JS or CSS files in a JSP page
 	3. Could not obtain transaction-synchronized Session for current thread
 	4. Spring Datatable library
+	5. Filed to lazily initialize a collection of role
 	
 	
 ## Change Port
@@ -32,4 +33,72 @@
 ## Spring Datatable library
 	See in files list.
 	
-## 
+## Filed to lazily initialize a collection of role
+### Solving 1 : OpenEntityManagerInViewFilter
+	<filter>
+		<filter-name>OpenEntityManagerInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>OpenEntityManagerInViewFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+### Solving 2 :
+	Change or Set FetchType.Eager
+	
+### Solving 3 : 
+#### Maven JSON Dependency : 
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.6.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.6.3</version>
+		</dependency>   
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.6.3</version>
+		</dependency>   
+		<!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-core-asl -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		 <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-hibernate4 -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.datatype</groupId>
+			<artifactId>jackson-datatype-hibernate5</artifactId>
+			<version>2.9.2</version>
+		</dependency>
+
+#### Download and Include to the library :
+	- http://blog.pastelstudios.com/wp-content/uploads/2012/03/spring3-jackson2-src.zip
+	- note : change to hibernate 5		
+
+#### Configure Json Message Converter 
+	<mvc:annotation-driven>
+	  <mvc:message-converters>
+	    <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+	      <property name="objectMapper">
+	        <bean class="com.pastelstudios.json.HibernateAwareObjectMapper" />
+	      </property>
+	    </bean> 
+	  </mvc:message-converters> 
+	</mvc:annotation-driven>
+		
+#### Example Fetching Data Manually 
+	public List<Department> home(){
+		List<Department> departments = departmentDao.getAllDept();
+		for(Department dept : departments){
+			List<Employee> employees = employeeDao.getEmployeesByDepartment(dept);
+			dept.setEmployees(employees);
+		}
+		
+		return departments;
+	}
