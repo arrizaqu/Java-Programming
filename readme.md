@@ -1,104 +1,44 @@
-# Common Issues "Not working" in Java
-	1. Change Port
-	2. Include JS or CSS files in a JSP page
-	3. Could not obtain transaction-synchronized Session for current thread
-	4. Spring Datatable library
-	5. Filed to lazily initialize a collection of role
-	
-	
-## Change Port
-	see files list.
+# Java Web
 
-## Include JS or CSS files in a JSP page
-### Define Resource File Assets on SpringConfiguration
-	<mvc:resources mapping="/resources/**" location="/resources/theme-new/" />
-### Activate Spring tag library (Base URL): 
-	<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-### example code : 
-	<spring:url value="/resources/css/main.css" var="mainCss" />
-	<spring:url value="/resources/js/jquery.1.10.2.min.js"  var="jqueryJs" />
-	<spring:url value="/resources/js/main.js" var="mainJs" />
-
-	<link href="${mainCss}" rel="stylesheet" />
-    <script src="${jqueryJs}"></script>
-    <script src="${mainJs}"></script>
-	
-## Could not obtain transaction-synchronized Session for current thread
-	* enable the transaction support 
-		* (<tx:annotation-driven> or @EnableTransactionManagement)
-		* declare the transactionManager and it should work through the SessionFactory.
-	* add @Transactional into your @Repository
-	* With @Transactional in your @Repository Spring is able to apply transactional support into your repository.
-	
-## Spring Datatable library
-	See in files list.
-	
-## Filed to lazily initialize a collection of role
-### Solving 1 : OpenEntityManagerInViewFilter
-	<filter>
-		<filter-name>OpenEntityManagerInViewFilter</filter-name>
-		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>OpenEntityManagerInViewFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
-	
-### Solving 2 :
-	Change or Set FetchType.Eager
-	
-### Solving 3 : 
-#### Maven JSON Dependency : 
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-core</artifactId>
-			<version>2.6.3</version>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.6.3</version>
-		</dependency>   
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-annotations</artifactId>
-			<version>2.6.3</version>
-		</dependency>   
-		<!-- https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-core-asl -->
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
-			<version>1.9.13</version>
-		</dependency>
-		 <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-hibernate4 -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-hibernate5</artifactId>
-			<version>2.9.2</version>
-		</dependency>
-
-#### Download and Include to the library :
-	- http://blog.pastelstudios.com/wp-content/uploads/2012/03/spring3-jackson2-src.zip
-	- note : change to hibernate 5		
-
-#### Configure Json Message Converter 
-	<mvc:annotation-driven>
-	  <mvc:message-converters>
-	    <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-	      <property name="objectMapper">
-	        <bean class="com.pastelstudios.json.HibernateAwareObjectMapper" />
-	      </property>
-	    </bean> 
-	  </mvc:message-converters> 
-	</mvc:annotation-driven>
+## Deployment Descriptor (Web XML)
+### Example : 
+	<web-app 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xmlns="http://java.sun.com/xml/ns/javaee"
+		xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+		xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+		id="Your_WebApp_ID"
+		version="2.5">
 		
-#### Example Fetching Data Manually 
-	public List<Department> home(){
-		List<Department> departments = departmentDao.getAllDept();
-		for(Department dept : departments){
-			List<Employee> employees = employeeDao.getEmployeesByDepartment(dept);
-			dept.setEmployees(employees);
+			<welcome-file-list>
+				<welcome-file>template.jsp</welcome-file>
+				<welcome-file>home.jsp</welcome-file>
+			</welcome-file-list>
+	
+	</web-app>
+## Servlet 
+	java Servlet technology lets you define HTTP-specific servlet classes. A servlet class extends the capabilities of servers that host applications accessed by way of a request-response programming model
+### Web.xml
+	<servlet>
+		<servlet-name>myhome</servlet-name>
+		<servlet-class>com.xsis.trainingweb.controller.Home</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>myhome</servlet-name>
+		<url-pattern>/home</url-pattern>
+	</servlet-mapping>
+	
+### Controller 	
+	public class Home extends HttpServlet{
+
+	//1. GET
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		try{
+			PrintWriter output = resp.getWriter();
+			output.println("java servlet works!!");
+		}catch(Exception e){
+			e.printStackTrace();
 		}
-		
-		return departments;
 	}
