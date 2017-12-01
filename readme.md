@@ -4,7 +4,9 @@
 	3. Could not obtain transaction-synchronized Session for current thread
 	4. Spring Datatable library
 	5. Filed to lazily initialize a collection of role
-	
+	6. Handling Error Page
+		* Deployment Descriptor
+		* Controller Exception
 	
 ## Change Port
 	see files list.
@@ -101,4 +103,25 @@
 		}
 		
 		return departments;
+	}
+	
+## Handling Error Page
+	* Deployment Descriptor
+	* Controller Exception
+	
+### Deployment Descriptor
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404</location>
+	</error-page>
+	
+### Controller Exception
+	@Controller
+	public class HttpErrorHandler {
+
+		 @RequestMapping(value="/404")
+		 public String error404(){
+			 
+		  return "error/pagenotfound";
+		 }
 	}
