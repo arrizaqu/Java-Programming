@@ -7,6 +7,8 @@
 	6. Handling Error Page
 		* Deployment Descriptor
 		* Controller Exception
+	7. Error Eclipse code 13 (common)
+	
 	
 ## Change Port
 	see files list.
@@ -125,3 +127,11 @@
 		  return "error/pagenotfound";
 		 }
 	}
+	
+## Error Eclipse code 13 (common)
+	...
+	--launcher.appendVmargs
+	-vm
+	C:\Program Files\Java\jre1.8.0_45\bin\javaw.exe
+	-vmargs
+	...
