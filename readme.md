@@ -8,6 +8,7 @@
 		* Deployment Descriptor
 		* Controller Exception
 	7. Error Eclipse code 13 (common)
+	8. org.hibernate.NonUniqueObjectException: a different object with the same identifier value was already associated with the session
 	
 	
 ## Change Port
@@ -322,3 +323,16 @@
 	C:\Program Files\Java\jre1.8.0_45\bin\javaw.exe
 	-vmargs
 	...
+	
+## org.hibernate.NonUniqueObjectException: a different object with the same identifier value was already associated with the session
+### Example : 
+	public void updateUserRole(User user) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		User newUser = (User)session.merge(user);
+		session.saveOrUpdate(newUser);
+		session.flush();
+	}
+	
+### reference : 
+	https://stackoverflow.com/questions/11934944/saving-updating-object-with-hibernate
