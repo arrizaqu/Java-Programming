@@ -7,6 +7,7 @@
 	6. Handling Error Page
 		* Deployment Descriptor
 		* Controller Exception
+		* Error Listener
 	7. Error Eclipse code 13 (common)
 	8. org.hibernate.NonUniqueObjectException: a different object with the same identifier value was already associated with the session
 	
@@ -298,6 +299,7 @@
 ## Handling Error Page
 	* Deployment Descriptor
 	* Controller Exception
+	* Error Listener
 	
 ### Deployment Descriptor
 	<error-page>
@@ -314,6 +316,22 @@
 			 
 		  return "error/pagenotfound";
 		 }
+	}
+	
+### Error Listener
+	@ControllerAdvice
+	public class ExceptionController {
+		@ExceptionHandler(Exception.class)
+		public ModelAndView handleError(HttpServletRequest request, Exception e)   {
+			Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Request: " + request.getRequestURL() + " raised " + e);
+			return new ModelAndView("error");
+		}
+
+		@ExceptionHandler(NoHandlerFoundException.class)
+		public ModelAndView handleError404(HttpServletRequest request, Exception e)   {
+			Logger.getLogger(getClass().getName()).log(Level.SEVERE, "Request: " + request.getRequestURL() + " raised " + e);
+			return new ModelAndView("404");
+		}
 	}
 	
 ## Error Eclipse code 13 (common)
