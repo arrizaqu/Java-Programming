@@ -10,7 +10,8 @@
 		* Error Listener
 	7. Error Eclipse code 13 (common)
 	8. org.hibernate.NonUniqueObjectException: a different object with the same identifier value was already associated with the session
-	
+	9. object references an unsaved transient instance - save the transient instance before flushing
+	10. Save Date Format 
 	
 ## Change Port
 	see files list.
@@ -354,3 +355,29 @@
 	
 ### reference : 
 	https://stackoverflow.com/questions/11934944/saving-updating-object-with-hibernate
+	
+## object references an unsaved transient instance - save the transient instance before flushing
+### Solustion
+	Have you annotate cascade=CascadeType.ALL to your entity object mapping
+	@ManyToOne(cascade = CascadeType.ALL)
+    private String entityType;
+	
+### Reference : 
+	https://stackoverflow.com/questions/30165319/save-transient-object-before-flushing-error
+	
+## Save Date Format
+### Entity 
+	@Temporal(TemporalType.DATE)
+	@Column(name="birth_date")
+	private Date birthDate;
+	
+### HTML 
+	<form:input type="text" path="birthDate" class="form-control"/>
+	
+### Controller (Binder)
+	@InitBinder
+	public void dataBinding(WebDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		dateFormat.setLenient(false);
+		binder.registerCustomEditor(Date.class, "birthDate", new CustomDateEditor(dateFormat, true));
+	} 
