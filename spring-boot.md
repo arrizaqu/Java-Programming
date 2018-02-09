@@ -8,7 +8,7 @@
 	* web 
 	* JPA
 	* Mysql
-
+  
 ## first setup application.properties
 ```xml
 spring.datasource.url=jdbc:mysql://localhost:3306/springboot
