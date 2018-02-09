@@ -14,7 +14,7 @@
 spring.datasource.url=jdbc:mysql://localhost:3306/springboot
 spring.datasource.username=root
 spring.datasource.password=
-spring.jpa.generate-ddl=true
+spring.jpa.generate-ddl=true 
 ```
 
 
