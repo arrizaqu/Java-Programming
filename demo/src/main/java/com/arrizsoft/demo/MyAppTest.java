@@ -18,13 +18,21 @@ public class MyAppTest {
 	@Autowired
 	EmployeeDao employeeDao;
 	
-	@Test
+	/*@Test
 	public void initSave() {
 		Employee employee = new Employee();
-		employee.setId(1);
-		employee.setEmail("arrizaquUpdate@yahoo.com");
+		employee.setId(2);
+		employee.setEmail("arrizaqu2@yahoo.com");
 		employee.setDate(new Date());
-		employee.setName("masyda arrizaqu");
+		employee.setName("masyda arrizaqu 2");
 		employeeDao.save(employee);
+	}*/
+	
+	@Test
+	public void deleteEmployee() {
+		Employee emp = new Employee();
+		emp.setId(2);
+		
+		employeeDao.delete(emp);
 	}
 }

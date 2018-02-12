@@ -101,3 +101,13 @@ public void initSave() {
 }
 ```
 
+##### Delete 
+```java
+@Test
+public void deleteEmployee() {
+	Employee emp = new Employee();
+	emp.setId(2);
+	
+	employeeDao.delete(emp);
+}
+```
