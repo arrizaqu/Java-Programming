@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Employee {
@@ -18,7 +22,10 @@ public class Employee {
 	private String name;
 	private String address;
 	private String email;
+	@Temporal(TemporalType.DATE)
 	private Date date;
+	@ManyToOne
+	private Department department;
 	public int getId() {
 		return id;
 	}
@@ -48,6 +55,12 @@ public class Employee {
 	}
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	public Department getDepartment() {
+		return department;
+	}
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 	
 	

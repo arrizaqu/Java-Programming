@@ -52,6 +52,10 @@
 	    <version>5.1.45</version>
 	</dependency>
 		
+	<dependency>
+		<groupId>com.hazelcast</groupId>
+		<artifactId>hazelcast</artifactId>
+	</dependency>
 	</dependencies>
 
 	<build>
