@@ -133,7 +133,7 @@ try {
 
 ## @Sql Annotation
 #### create SQL file 
-```java
+```sql
 create sql file : (ex : src/test/resources/data/mysql.sql)
 
 insert into employee(id, name, address) values (1, "masyda arrizaqu", "seputih banyak");
