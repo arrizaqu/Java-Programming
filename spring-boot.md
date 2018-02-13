@@ -5,7 +5,9 @@
 * Dao
 	* extends PagingAndSortingRepository
 	* run unit test
-
+* Connection with Datasource
+* @Sql Annotation
+	
 ## Spring-boot starter
 * go to : https://start.spring.io/
 * simple package
@@ -107,7 +109,56 @@ public void initSave() {
 public void deleteEmployee() {
 	Employee emp = new Employee();
 	emp.setId(2);
-	
 	employeeDao.delete(emp);
 }
 ```
+
+## Connection with Datasource
+#### Define DataSource 
+```java
+import javax.sql.DataSource;
+
+@Autowired
+private DataSource dataSource;
+```
+
+#### example
+```java
+try {
+	Connection connection = dataSource.getConnection();
+	String sql = "select count(*) as jumlah from employee";	
+	ResultSet hasilQuery = connection.createStatement().executeQuery(sql);
+}catch(Exception e) {}
+```
+
+## @Sql Annotation
+#### create SQL file 
+```java
+create sql file : (ex : src/test/resources/data/mysql.sql)
+
+insert into employee(id, name, address) values (1, "masyda arrizaqu", "seputih banyak");
+insert into employee(id, name, address) values (2, "sri wahyuni", "jakarta timur");
+```
+
+#### Example
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.Sql.ExecutionPhase;
+import org.springframework.test.context.junit4.SpringRunner;
+
+@RunWith(SpringRunner.class)
+@SpringBootTest
+@Sql(
+		executionPhase=ExecutionPhase.BEFORE_TEST_METHOD,
+		scripts="/data/mysql.sql"
+		)
+public class MyTestApp {
+
+	@Test
+	public void before() {
+		System.out.println("execute before");
+	}
+	
+}

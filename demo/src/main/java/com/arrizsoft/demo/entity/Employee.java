@@ -7,29 +7,27 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 public class Employee {
-
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
-	@Column(name="name", nullable=false)
+	private long id;
+	@Column(nullable=false)
 	private String name;
 	private String address;
+	private String contact;
 	private String email;
 	@Temporal(TemporalType.DATE)
-	private Date date;
-	@ManyToOne
-	private Department department;
-	public int getId() {
+	@Column(name="birth_date")
+	private Date birthDate;
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -44,24 +42,23 @@ public class Employee {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	public String getContact() {
+		return contact;
+	}
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Date getDate() {
-		return date;
+	public Date getBirthDate() {
+		return birthDate;
 	}
-	public void setDate(Date date) {
-		this.date = date;
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
 	}
-	public Department getDepartment() {
-		return department;
-	}
-	public void setDepartment(Department department) {
-		this.department = department;
-	}
-	
 	
 }
