@@ -5,8 +5,10 @@
 * Dao
 	* extends PagingAndSortingRepository
 	* run unit test
+	* Assertion
 * Connection with Datasource
 * @Sql Annotation
+* Reference
 	
 ## Spring-boot starter
 * go to : https://start.spring.io/
@@ -58,7 +60,21 @@ public interface EmployeeDao extends PagingAndSortingRepository<Employee, Intege
 }
 ```
 
-#### run junit testing
+#### run unit testing
+#### Assertion
+* assertEquals
+* assertNotNull
+* assertNull
+* assertSame
+* assertNotSame
+```java
+//example 
+Employee emp = this.employeeDao.findOne((long)105);
+List<Employee> listEmployee = (List<Employee>) employeeDao.findAll();
+
+Assert.assertNotNull(emp);
+Assert.assertEquals("arrizaqu@yahoo.com", emp.getEmail());
+```
 ##### Saving
 ```java
 import java.util.Date;
@@ -163,3 +179,6 @@ public class MyTestApp {
 	}
 }
 ```
+
+## Reference 
+http://tutorials.jenkov.com/java-unit-testing/asserts.html

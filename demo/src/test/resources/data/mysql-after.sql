@@ -1,2 +1,6 @@
-insert into employee(id, name, address) values (1, "masyda arrizaqu", "seputih banyak");
-insert into employee(id, name, address) values (2, "sri wahyuni", "jakarta timur");
+insert into employee(name, address) values ("masyda arrizaqu", "seputih banyak");
+insert into employee(name, address) values ("sri wahyuni", "jakarta timur");
+insert into employee(name, address) values ("didit gunadhi", "tangerang");
+insert into employee(name, address) values ("amel", "lampung");
+insert into employee(name, address) values ("yusuf", "bogor");
+-- 
