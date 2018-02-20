@@ -8,6 +8,7 @@
 	* Assertion
 * Connection with Datasource
 * @Sql Annotation
+* Pageable 
 * Reference
 	
 ## Spring-boot starter
@@ -180,5 +181,33 @@ public class MyTestApp {
 }
 ```
 
+## Pageable
+* size 
+* Page 
+* sort 
+* search
+### Example
+#### Controller
+```java
+@RestController
+public class MyApi {
+
+	@Autowired
+	EmployeeDao employeeDao;
+	
+	@RequestMapping(value="/index", method=RequestMethod.GET)
+	public Page<Employee> index(Pageable pageable) {
+		return employeeDao.findAll(pageable);
+	}
+}
+```
+
+#### URL
+```java
+http://localhost:8080/index?size=3&page=2&sort=id,desc
+```
+### 
+
 ## Reference 
-http://tutorials.jenkov.com/java-unit-testing/asserts.html
+http://tutorials.jenkov.com/java-unit-testing/asserts.html'
+https://docs.spring.io/spring-data/rest/docs/2.0.0.M1/reference/html/paging-chapter.html

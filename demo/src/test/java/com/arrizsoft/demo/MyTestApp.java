@@ -41,10 +41,6 @@ public class MyTestApp {
 	public void before() {
 		Employee emp = this.employeeDao.findOne((long)105);
 		List<Employee> listEmployee = (List<Employee>) employeeDao.findAll();
-		
-		Assert.assertNotNull(emp);
-		Assert.assertEquals("arrizaqu@yahoo.com", emp.getEmail());
-		
 	}
 
 	@After
