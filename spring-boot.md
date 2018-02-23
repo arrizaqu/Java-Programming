@@ -6,6 +6,7 @@
 	* extends PagingAndSortingRepository
 	* run unit test
 	* Assertion
+	* Custom Dao
 * Connection with Datasource
 * @Sql Annotation
 * Pageable 
@@ -130,6 +131,31 @@ public void deleteEmployee() {
 }
 ```
 
+#### Custom Dao
+we can, custome default feature method PagingAndSoringRepository like, below
+* @param
+* @Query
+* example :
+#### Controller 
+```java
+@GetMapping(value= "/second/{search-name}")
+public Page<Employee> second(Pageable pageable, @PathVariable("search-name") String searchname){
+	String name = "masyda arrizaqu";
+	return employeeDao.getEmployeeByName(searchname, pageable);
+}
+```
+
+#### DAO
+```java
+@Query("from Employee emp where emp.name like %:thename%")
+public Page<Employee> getEmployeeByName(@Param("thename") String name, Pageable pageable);
+```
+
+#### Access URL 
+```java
+http://localhost:8080/second/arrizaqu?size=5&sort=id,desc
+```
+
 ## Connection with Datasource
 #### Define DataSource 
 ```java
@@ -206,8 +232,10 @@ public class MyApi {
 ```java
 http://localhost:8080/index?size=3&page=2&sort=id,desc
 ```
+
 ### 
 
 ## Reference 
 http://tutorials.jenkov.com/java-unit-testing/asserts.html'
 https://docs.spring.io/spring-data/rest/docs/2.0.0.M1/reference/html/paging-chapter.html
+
