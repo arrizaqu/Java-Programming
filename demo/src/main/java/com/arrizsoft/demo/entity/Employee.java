@@ -14,8 +14,7 @@ import javax.persistence.TemporalType;
 public class Employee {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
+	private String id;
 	@Column(nullable=false)
 	private String name;
 	private String address;
@@ -24,10 +23,11 @@ public class Employee {
 	@Temporal(TemporalType.DATE)
 	@Column(name="birth_date")
 	private Date birthDate;
-	public long getId() {
+	
+	public String getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {

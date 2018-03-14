@@ -1,0 +1,24 @@
+# basic java programing
+-- OOP 
+-- Object
+-- Java Class
+-- Java Object 
+-- overloading
+-- Encapsulation
+-- Inheritance
+-- Overidding
+-- Polymorphism
+                                                                                                                                                                        
+# Framework Spring
+-- DAO Pattern (Data Access Object)
+-- Spring MVC
+-- IOC (Inversion of Control)
+-- Dependency Injection (DI)
+-- MAVEN (build tool)
+-- ORM -hibernate
+
+# Front end
+-- HTML + CSS
+-- Javascript
+-- Bootstrap
+-- Ajax
