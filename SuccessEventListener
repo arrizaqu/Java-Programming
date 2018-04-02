@@ -1,0 +1,70 @@
+# User Information from Success Event Listener
+1. HttpSession
+2. Success Event Listener
+3. Get Data From HttpSession
+
+## HttpSession
+### Set up (Web.xml)
+## Example
+```java
+@Component
+public class SuccessAuthListener implements ApplicationListener<InteractiveAuthenticationSuccessEvent> {
+
+	@Autowired
+	private HttpSession httpSession;
+  
+  ........
+```
+
+## Success Event Listener
+```java
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
+import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
+import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
+
+import com.bankmega.traning.model.User;
+
+@Component
+public class SuccessAuthListener implements ApplicationListener<InteractiveAuthenticationSuccessEvent> {
+
+	@Autowired
+	private HttpSession httpSession;
+	
+	public void onApplicationEvent(InteractiveAuthenticationSuccessEvent event) {
+		// TODO Auto-generated method stub
+		//System.out.println("You are successfully log in..");
+		UserDetails userDetails = (UserDetails) event.getAuthentication().getPrincipal();
+		String username = userDetails.getUsername();
+    //User user = userDao.findUserByUsername(username);
+		User user = new User();
+		user.setUsername(username);
+		
+		httpSession.setAttribute("application-user", user);
+	}
+
+}
+```
+
+# Get Data From HttpSession
+## Example 
+```java
+..........
+@Autowired
+	private HttpSession httpSession;
+
+	@RequestMapping
+	public String index(Model model){
+		User applicationUser =  (User) httpSession.getAttribute("application-user");
+		System.out.println("application username : "+ applicationUser.getUsername());
+		List<Department> departments = departmentService.getAllDepartments();
+		model.addAttribute("departments", departments);
+		return "department";
+	}
+  
+ .............
+```
