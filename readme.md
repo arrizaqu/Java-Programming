@@ -12,6 +12,7 @@
 	8. org.hibernate.NonUniqueObjectException: a different object with the same identifier value was already associated with the session
 	9. object references an unsaved transient instance - save the transient instance before flushing
 	10. Save Date Format 
+	11. could not resolve archetype (maven)
 	
 ## Change Port
 	see files list.
@@ -416,3 +417,10 @@ public void dataBinding(WebDataBinder binder) {
 	binder.registerCustomEditor(Date.class, "birthDate", new CustomDateEditor(dateFormat, true));
 } 
 ```
+
+## could not resolve archetype
+1. Open Window > Preferences
+2. Open Maven > Archetypes
+3. Click 'Add Remote Catalog' and add the following:
+4. Catalog File: http://repo1.maven.org/maven2/archetype-catalog.xml
+5. Description: maven catalog
