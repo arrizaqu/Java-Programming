@@ -1,0 +1,44 @@
+# Custome Menu Role (Example 1)
+  * Setting Http Config
+  * Menu Role Entity
+  
+## Setting Http Config
+```xml
+<http auto-config="true" use-expressions="true">	
+  <!-- <intercept-url pattern="/*" access="isAuthenticated()"/> -->
+  <intercept-url pattern="/login*" access="permitAll()"/>
+  <intercept-url pattern="/**" access="isAuthenticated()"/>
+  <!-- 
+  <intercept-url pattern="/department/**" access="isAuthenticated()"/>
+  <intercept-url pattern="/employee/**" access="hasRole('ROLE_ADMIN') and hasRole('ROLE_STAFF')"/>
+  <intercept-url pattern="/department/**" access="hasRole('ROLE_ADMIN')"/>
+   -->
+   <form-login
+      login-page="/login"
+      default-target-url="/dashboard"
+    authentication-failure-url="/login?error"
+    username-parameter="username"
+    authentication-success-handler-ref="customAuthenticationSuccessHandler"
+    password-parameter="password" />
+  <logout logout-success-url="/login?logout" />
+  <!-- access denied page -->
+  <access-denied-handler error-page="/403" />
+  <csrf />
+</http>
+```
+
+## Menu Role Entity
+```java
+@Entity
+@Table(name="Menu")
+public class ApplicationMenu {
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private int id;
+	private String url;
+	private String describe;
+	@ManyToMany
+	private List<Role> roles; 
+  ..........
+```
