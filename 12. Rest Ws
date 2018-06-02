@@ -1,1 +1,72 @@
-# Rest Full
+# Jax Rs 
+* Dependency
+* Deployment Descriptor
+* Hallo world
+
+## Dependency 
+```xml
+<dependency>
+    <groupId>javax</groupId>
+	    <artifactId>javaee-api</artifactId>
+	    <version>7.0</version>
+	    <scope>provided</scope>
+	</dependency>
+	<dependency>
+		<groupId>com.sun.jersey</groupId>
+		<artifactId>jersey-server</artifactId>
+		<version>1.8</version>
+	</dependency>
+```
+
+## Deployment Descriptor or ApplicationPath
+###
+```java
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
+
+@ApplicationPath("api")
+public class ApplicationApi extends Application{
+
+}
+```
+
+###
+```xml
+<servlet>
+  <servlet-name>jersey-serlvet</servlet-name>
+  <servlet-class>
+                   com.sun.jersey.spi.container.servlet.ServletContainer
+              </servlet-class>
+  <init-param>
+       <param-name>com.sun.jersey.config.property.packages</param-name>
+       <param-value>com.webapp.api</param-value>
+  </init-param>
+  <load-on-startup>1</load-on-startup>
+</servlet>
+
+<servlet-mapping>
+  <servlet-name>jersey-serlvet</servlet-name>
+  <url-pattern>/api/*</url-pattern>
+</servlet-mapping>
+```
+
+## Hallo World
+```java
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.Response;
+
+@Path("/hallo")
+public class Hallo {
+
+	@GET
+	@Path("/ping")
+	public Response index() {
+		return Response.ok().entity("hallo, arrizaqu").build();
+	}
+}
+```
+
+## Reference
+1. http://www.baeldung.com/jax-rs-spec-and-implementations
+2. https://www.mkyong.com/webservices/jax-rs/jersey-hello-world-example/
