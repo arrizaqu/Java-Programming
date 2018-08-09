@@ -13,7 +13,7 @@
 	9. object references an unsaved transient instance - save the transient instance before flushing
 	10. Save Date Format 
 	11. could not resolve archetype (maven)
-	
+	12. Http Status 406 Not Acceptable
 ## Change Port
 	see files list.
 
@@ -424,3 +424,8 @@ public void dataBinding(WebDataBinder binder) {
 3. Click 'Add Remote Catalog' and add the following:
 4. Catalog File: http://repo1.maven.org/maven2/archetype-catalog.xml
 5. Description: maven catalog
+
+## Http Status 406 Not Acceptable
+* add in dispatcher servlet <mvc:annotation-driven>
+
+### see more : https://stackoverflow.com/questions/7462202/spring-json-request-getting-406-not-acceptable
