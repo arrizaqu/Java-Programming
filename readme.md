@@ -430,6 +430,8 @@ public void dataBinding(WebDataBinder binder) {
 * add in dispatcher servlet <mvc:annotation-driven>
 
 ## Avoid multiple Instance of Application
+
+http://www.java2s.com/Tutorial/Java/0180__File/PreventingmultipleinstancesofanapplicationThefilelocktechnique.htm
 ```java
 import java.io.File;
 import java.io.RandomAccessFile;
