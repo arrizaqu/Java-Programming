@@ -15,6 +15,7 @@
 	11. could not resolve archetype (maven)
 	12. Http Status 406 Not Acceptable
 	13. Avoid multiple Instance of Application
+	14. Relate Object Relation on hibernate without Id primary
 ## Change Port
 	see files list.
 
@@ -485,5 +486,57 @@ public class Main {
   }
 }
 ```
+
+## Relate Object Relation on hibernate without Id primary
+### Example: 
+```sql
+-- equivalent for
+create table users(
+  username varchar(50) not null primary key,
+  password varchar(100) not null,
+  enabled boolean not null
+);
+
+create table authorities (
+	username varchar(50) not null,
+	authority varchar(50) not null,
+constraint fk_authorities_users foreign key(username) references users(username)
+);
+```
+#### User Table
+```
+@Entity
+@Table(name="USERS")
+public class Users {
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    private String id;
+    @NotBlank @NotEmpty @NotNull
+    @NaturalId
+    private String username;
+    private String password;
+    private boolean enabled;
+```
+#### Authority Table
+```
+public class Authorities {
+
+    @Id
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid2")
+    private String id;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(
+            name = "username",
+            referencedColumnName = "username"
+    )
+    private Users users;
+    private String authority;
+```
+
+#### keyword relation without id
+* user NaturalId
 
 ### see more : https://stackoverflow.com/questions/7462202/spring-json-request-getting-406-not-acceptable
