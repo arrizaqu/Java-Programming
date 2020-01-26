@@ -538,5 +538,6 @@ public class Authorities {
 
 #### keyword relation without id
 * user NaturalId
+* https://vladmihalcea.com/how-to-map-a-manytoone-association-using-a-non-primary-key-column/
 
 ### see more : https://stackoverflow.com/questions/7462202/spring-json-request-getting-406-not-acceptable
