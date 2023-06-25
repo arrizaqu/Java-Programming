@@ -1,0 +1,10 @@
+#Pagination Update
+
+## Dependency 
+```
+<dependency>
+  <groupId>com.arrizaqu</groupId>
+  <artifactId>simpledtable</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+</dependency>
+```
