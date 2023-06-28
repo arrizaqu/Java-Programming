@@ -1,0 +1,32 @@
+# Sample Jquery Validation
+```
+$('#create-branch').click(function(){
+  $('#form-create-branch').validate({
+    rules: {
+      branchName: "required",
+      commitedCode: "required", 
+      branchNote: "required",
+      branchUrl: "required"
+    },
+    submitHandler: function(){
+      
+      var datainput = {
+        branchName : $('#branchName').val(),
+        commitedCode: $('#commitedCode').val(),
+        notes: $('#branchNote').val(),
+        branchUrl: $('#branchUrl').val(),
+      }
+      
+      $.ajax({	
+        type : 'POST',
+        url : /*[[@{/branch/save}]]*/ +"",
+        contentType: 'application/json',
+        data : JSON.stringify(datainput),
+      }).done(function(settings){
+        setupAjaxDefault.reset('form-create-branch');
+        branchTable.DataTable().draw();
+      });	
+    }
+  });
+});
+```
