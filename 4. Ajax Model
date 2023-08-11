@@ -1,0 +1,12 @@
+# This is Kind of Ajax Implementation
+## Ajax with Datatable
+## Ajax with Method POST Standart
+```java
+$.ajax({
+  url: baseUrl+ 'payment/searchmember',
+  type: 'POST',
+  contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+  data: jQuery.param(dataParam)
+});
+```
+## Ajax with Object DTO
